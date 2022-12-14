@@ -1,6 +1,9 @@
-<script setup lang="ts">
-</script>
-
 <template>
-  Hello
+  <AppProvider>
+    <router-view />
+  </AppProvider>
 </template>
+
+<script setup lang="ts">
+import AppProvider from "./AppProvider.vue";
+</script>
