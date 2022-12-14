@@ -145,8 +145,8 @@ export const MapFiltersInitState = (
     baseState[filter.key] && !clearMode
       ? (state[filter.key] = baseState[filter.key])
       : (state[filter.key] = GetInitState(
-          filter.inputType,
-          filter.defaultValue
+          (filter as any).inputType,
+          (filter as any).defaultValue
         ));
   });
   return state;
@@ -192,8 +192,8 @@ export const ColumnsMapper = ({
       width: 80 + rowActions.length * 35,
     },
     ...columns.filter(Boolean).map((column: Column, index: number) => ({
-      headerName: column.headerName,
-      field: column.field,
+      headerName: column.label,
+      field: column.key,
       width: column.width,
       hide: column.hide ?? false,
       resizable: column.resizable ?? true,

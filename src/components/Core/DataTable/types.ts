@@ -80,8 +80,8 @@ export interface FilterState {
 }
 
 export interface Column {
-  headerName: string;
-  field: string;
+  label: string;
+  key: string;
   hide?: boolean;
   filter?: TableFilter;
   width?: number | string;
