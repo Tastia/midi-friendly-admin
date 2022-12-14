@@ -48,7 +48,7 @@ interface CellRendererParams {
   data: { [key: string]: any };
   eGridCell: HTMLElement;
   tableApi: TableApi;
-  _rowActions: TableRowAction;
+  _rowActions: TableRowAction<{ [key: string]: any }>;
 }
 
 const props = defineProps({

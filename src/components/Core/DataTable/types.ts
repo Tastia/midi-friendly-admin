@@ -79,7 +79,9 @@ export interface FilterState {
   [key: string]: string | number | boolean | any[] | object;
 }
 
-export interface Column {
+export interface Column<
+  T extends { [key: string]: any } = { [key: string]: any }
+> {
   label: string;
   key: string;
   hide?: boolean;
@@ -87,11 +89,7 @@ export interface Column {
   width?: number | string;
   sortable?: boolean;
   resizable?: boolean;
-  render?: (
-    value: any,
-    row: GenericObject,
-    params: GenericObject
-  ) => VNodeChild | string;
+  render?: (value: any, row: T, params: GenericObject) => VNodeChild | string;
   cellComponent?: GenericObject;
   cellComponentParams?: GenericObject;
 }
@@ -152,13 +150,13 @@ export interface ActionParams {
   fetchParams?: FetchParams;
 }
 
-export type DataSource = (params: FetchParams) => Promise<
+export type DataSource<T> = (params: FetchParams) => Promise<
   | {
-      docs: any[];
+      docs: T[];
       totalDocs: number;
       totalPages: number;
     }
-  | any[]
+  | T[]
 >;
 
 export interface TableActionParams {
@@ -186,9 +184,9 @@ export interface TableApi {
   setPageSize: (size: number) => void;
 }
 
-export type TableRowAction = (params: {
+export type TableRowAction<T> = (params: {
   value: any;
-  data: { [key: string]: any };
+  data: T;
   tableApi: TableApi;
 }) => {
   icon: string;
@@ -196,7 +194,7 @@ export type TableRowAction = (params: {
   action?: () => void;
   link?: string | RouteLocationRaw;
   permissions?: (string | string[])[];
-  condition?: (data: { [key: string]: any }) => any;
+  condition?: (data: T) => any;
 }[];
 
 export interface GridConfig {
@@ -246,19 +244,23 @@ export interface GridControls {
   };
 }
 
-export interface DataTableSchema {
+export interface DataTableSchema<
+  T extends { [key: string]: any } = { [key: string]: any }
+> {
   remote: boolean;
   optimizeQuery?: OptimizedQueryFields[];
-  datasource: DataSource;
+  datasource: DataSource<T>;
   tableKey?: string;
-  columns: Column[];
+  columns: Column<T>[];
   staticFilters?: StaticFilter[];
   filters?: TableFilter[];
   searchQuery?: string[];
   enableSelection?: boolean;
   actions?: TableAction[];
-  rowActions?: TableRowAction;
+  rowActions?: TableRowAction<T>;
   columnFitMode?: "fit" | "fill";
 }
 
-export type DataTableFactory = (...args: any[]) => DataTableSchema;
+export type DataTableFactory<
+  T extends { [key: string]: any } = { [key: string]: any }
+> = (...args: any[]) => DataTableSchema<T>;

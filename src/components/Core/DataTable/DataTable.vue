@@ -232,7 +232,7 @@ const props = defineProps({
     default: () => [],
   },
   datasource: {
-    type: Function as PropType<DataSource>,
+    type: Function as PropType<DataSource<{ [key: string]: any }>>,
     required: true,
     default: () => () => Promise.resolve([]),
   },
@@ -247,7 +247,7 @@ const props = defineProps({
     default: true,
   },
   rowActions: {
-    type: Function as PropType<TableRowAction>,
+    type: Function as PropType<TableRowAction<{ [key: string]: any }>>,
     required: false,
     default: () => [],
   },
