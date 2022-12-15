@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { OrganizationTableSchema } from "~/schemas/organization.schema";
+import { OrganizationTableSchema } from "~/schemas/organization";
 
 const schema = OrganizationTableSchema();
 </script>

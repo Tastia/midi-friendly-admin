@@ -1,5 +1,5 @@
-import { CreateOrganizationDto, Organization } from "~/types/organization.type";
-import { OrganizationList } from "~/types/organization.type";
+import { CreateOrganizationDto, Organization } from "~/types/organization";
+import { OrganizationList } from "~/types/organization";
 import { ApiInstance } from "../instance";
 
 export const OrganizationController = {

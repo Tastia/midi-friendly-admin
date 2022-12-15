@@ -1,10 +1,7 @@
 import { FormSchema } from "@chronicstone/vue-sweetforms";
 import { OrganizationController } from "~/api/controllers/organization.controller";
 import { DataTableSchema } from "~/components/Core/DataTable/types";
-import {
-  CreateOrganizationDto,
-  OrganizationList,
-} from "~/types/organization.type";
+import { CreateOrganizationDto, OrganizationList } from "~/types/organization";
 
 export function OrganizationTableSchema(): DataTableSchema<
   OrganizationList[number]
