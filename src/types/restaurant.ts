@@ -1,5 +1,5 @@
-import { Organization } from "./organization.type";
-import { User } from "./user.types";
+import { Organization } from "./organization";
+import { User } from "./user";
 
 export type Restaurant = {
   _id: string;
