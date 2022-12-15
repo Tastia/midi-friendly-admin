@@ -1,4 +1,4 @@
-import { Restaurant } from "~/types/restaurant.types";
+import { Restaurant } from "~/types/restaurant";
 import { DataTableSchema } from "~/components/Core/DataTable/types";
 import { RestaurantController } from "~/api/controllers/restaurant.controller";
 

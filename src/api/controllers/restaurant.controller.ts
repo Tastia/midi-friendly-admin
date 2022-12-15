@@ -1,4 +1,4 @@
-import { Restaurant } from "./../../types/restaurant.types";
+import { Restaurant } from "../../types/restaurant";
 import { ApiInstance } from "./../instance";
 
 export const RestaurantController = {

@@ -12,6 +12,11 @@ export const AdminnMenuItems: Array<NavigationMenuItem> = [
     key: "admin.users",
   },
   {
+    label: "Invitations",
+    icon: "ph:users-three-fill",
+    key: "admin.invitations",
+  },
+  {
     label: "Restaurants",
     icon: "ic:baseline-restaurant",
     key: "admin.restaurants",
