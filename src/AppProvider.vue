@@ -9,6 +9,15 @@ import {
 import { FormProvider } from "@chronicstone/vue-sweetforms";
 import "@chronicstone/vue-sweetforms/dist/style.css";
 const appStore = useAppStore();
+
+watch(
+  () => appStore.isDark,
+  (isDark: boolean) => {
+    if (isDark) document?.querySelector("body")?.classList.add("dark");
+    else document?.querySelector("body")?.classList.remove("dark");
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
