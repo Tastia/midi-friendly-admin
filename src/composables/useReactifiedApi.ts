@@ -1,4 +1,5 @@
 import { useSweetform } from "@chronicstone/vue-sweetforms";
+import { FormApi } from "@chronicstone/vue-sweetforms/src/types/form";
 import {
   useDialog,
   useLoadingBar,
@@ -15,7 +16,7 @@ let dialogApi: DialogApiInjection | null = null;
 let messageApi: MessageApiInjection | null = null;
 let notificationApi: NotificationApiInjection | null = null;
 let loadingBarApi: LoadingBarApiInjection | null = null;
-let formApi: any = null;
+let formApi: FormApi | null = null;
 
 export const useReactifiedApi = () => {
   if (!dialogApi) dialogApi = useDialog();
