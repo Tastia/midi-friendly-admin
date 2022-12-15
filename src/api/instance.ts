@@ -3,7 +3,9 @@ import { useReactifiedApi } from "~/composables/useReactifiedApi";
 import { useUserStore } from "~/stores/user.store";
 
 export const ApiInstance = axios.create({
-  baseURL: `${import.meta.env?.VITE_API_URL ?? ""}/api/v2` as string,
+  baseURL: `${
+    import.meta.env?.VITE_API_URL ?? "http://localhost:3333"
+  }/api` as string,
 });
 
 ApiInstance.interceptors.request.use((config) => {
