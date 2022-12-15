@@ -179,7 +179,7 @@ export const ColumnsMapper = ({
           ...(!isRemote && {
             headerCheckboxSelection: true,
           }),
-          width: 60,
+          width: 80,
           resizable: false,
         },
     rowActions?.length && {

@@ -3,10 +3,10 @@ import { deepmerge } from "deepmerge-ts";
 export const DefaultThemeOverrides = {
   common: {
     borderRadius: "6px",
-    primaryColor: "#319795FF",
-    primaryColorHover: "#3BB3B1FF",
-    primaryColorPressed: "#2A807EFF",
-    primaryColorSuppl: "#3B918FFF",
+    primaryColor: "#F18669",
+    primaryColorHover: "#DF6E50",
+    primaryColorPressed: "#F18669",
+    primaryColorSuppl: "#DF6E50",
     heightTiny: "26px",
     heightSmall: "32px",
     heightMedium: "38px",
@@ -35,12 +35,12 @@ const _lightThemeOverrides = {
 
 const _darkThemeOverrides = {
   common: {
-    bodyColor: "rgba(29, 30, 39, 1)",
-    cardColor: "rgba(40, 41, 54, 1)",
-    modalColor: "rgba(40, 41, 54, 1)",
+    bodyColor: "#242424",
+    cardColor: "#1A1A1A",
+    modalColor: "#1A1A1A",
     scrollbarWidth: "5px",
     fontFamily: "Lato",
-    popoverColor: "rgba(41, 41, 54, 1)",
+    popoverColor: "#1A1A1A",
   },
   Input: {
     color: "rgba(62, 64, 83, 1)",

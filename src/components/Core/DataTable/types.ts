@@ -1,9 +1,6 @@
 import { ComputedRef, Ref, VNodeChild, WritableComputedRef } from "vue";
 import { RouteLocationRaw } from "vue-router";
-
-export interface GenericObject {
-  [key: string]: any;
-}
+import { GenericObject, NestedPaths, TypeFromPath } from "~/types/_utils";
 
 export type FilterMatchMode =
   | "arrayContains"
@@ -36,15 +33,13 @@ export interface OptimizedQueryFields {
 }
 
 export interface TableFilter {
-  label?:
-    | string
-    | ((dependencies?: { [key: string]: any }) => string | VNodeChild);
+  label?: string | ((dependencies?: GenericObject) => string | VNodeChild);
   key: string;
   type: FilterType;
   options?:
     | SelectOptions[]
     | ((
-        dependencies?: { [key: string]: any } | undefined
+        dependencies?: GenericObject | undefined
       ) => SelectOptions[] | Promise<SelectOptions[]>);
   placeholder?: string;
   default?: any;
@@ -79,11 +74,9 @@ export interface FilterState {
   [key: string]: string | number | boolean | any[] | object;
 }
 
-export interface Column<
-  T extends { [key: string]: any } = { [key: string]: any }
-> {
+export interface Column<T extends GenericObject = GenericObject> {
   label: string;
-  key: string;
+  key: NestedPaths<T>;
   hide?: boolean;
   filter?: TableFilter;
   width?: number | string;
@@ -238,15 +231,13 @@ export interface GridControls {
   };
   filters: {
     searchQuery: string;
-    panelFilters: { [key: string]: any };
-    inlineFilters: { [key: string]: any };
-    staticFilters: { [key: string]: any };
+    panelFilters: GenericObject;
+    inlineFilters: GenericObject;
+    staticFilters: GenericObject;
   };
 }
 
-export interface DataTableSchema<
-  T extends { [key: string]: any } = { [key: string]: any }
-> {
+export interface DataTableSchema<T extends GenericObject = GenericObject> {
   remote: boolean;
   optimizeQuery?: OptimizedQueryFields[];
   datasource: DataSource<T>;
@@ -261,6 +252,6 @@ export interface DataTableSchema<
   columnFitMode?: "fit" | "fill";
 }
 
-export type DataTableFactory<
-  T extends { [key: string]: any } = { [key: string]: any }
-> = (...args: any[]) => DataTableSchema<T>;
+export type DataTableFactory<T extends GenericObject = GenericObject> = (
+  ...args: any[]
+) => DataTableSchema<T>;

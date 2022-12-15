@@ -8,7 +8,7 @@
     >
       <template #header>
         <div
-          class="flex flex-col lg:(flex-row items-center justify-between) w-full gap-4"
+          class="flex flex-col !lg:flex-row !lg:items-center !lg:justify-between w-full gap-4"
         >
           <div class="flex flex-col gap-1">
             <div><slot /></div>
@@ -16,7 +16,9 @@
               >{{ gridContent.nbSelected }} selected</span
             >
           </div>
-          <div class="flex flex-col gap-4 md:(flex-row items-center gap-3)">
+          <div
+            class="flex flex-col gap-4 !md:flex-row !md:items-center !md:gap-3"
+          >
             <FilterInput
               v-if="searchQuery?.length"
               v-model="gridControls.filters.searchQuery"
@@ -58,7 +60,7 @@
                   v-if="nbActive < 1"
                   secondary
                   type="primary"
-                  class="w-full md:w-auto"
+                  class="w-full !md:w-auto"
                 >
                   <template #icon>
                     <NIcon><mdi-filter /></NIcon
@@ -68,7 +70,7 @@
                   v-else
                   secondary
                   type="primary"
-                  class="w-full md:w-auto"
+                  class="w-full !md:w-auto"
                 >
                   <template #icon>
                     <NIcon><mdi-filter /></NIcon
@@ -117,10 +119,10 @@
       </div>
       <template #action>
         <div
-          class="flex w-full flex-col md:(flex-row justify-between items-center) gap-4"
+          class="flex w-full flex-col !md:flex-row !md:justify-between !md:items-center gap-4"
         >
           <div
-            class="flex items-center w-full gap-3 justify-between md:justify-start"
+            class="flex items-center w-full gap-3 justify-between !md:justify-start"
           >
             <NSelect
               v-model:value="gridControls.pagination.pageSize"
@@ -148,7 +150,7 @@
               of {{ gridControls.pagination.rowTotalCount }}</span
             >
           </div>
-          <div class="w-full flex justify-center md:justify-end">
+          <div class="w-full flex justify-center !md:justify-end">
             <n-pagination
               v-model:page="gridControls.pagination.pageIndex"
               :page-count="gridControls.pagination.pageTotalCount"

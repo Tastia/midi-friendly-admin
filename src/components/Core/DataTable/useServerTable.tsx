@@ -15,16 +15,9 @@ import {
   TableAction,
   TableApi,
 } from "./types";
-import { useSweetform } from "@chronicstone/vue-sweetforms";
-import { RemovableRef, useStorage } from "@vueuse/core";
 import { useMessage } from "naive-ui";
-import { computed, onMounted, reactive, watch, ref, toRefs, Ref } from "vue";
 import { useRoute } from "vue-router";
-// import { usePermission } from "~/composables/usePermission";
-import { pipeMergeObject } from "~/utils/other/pipeMergeObject";
-import { sleep } from "~/utils/other/sleep";
-import { generateUUID } from "~/utils/other/uuid";
-import { renderIcon } from "~/utils/vue/renderVNode";
+import { RemovableRef } from "@vueuse/core";
 
 export const useServerTable = (props: any) => {
   const {
