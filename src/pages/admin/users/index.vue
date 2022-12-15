@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UserTableSchema } from "~/schemas/user.schema";
+import { UserTableSchema } from "~/schemas/user";
 
 const tableSchema = UserTableSchema();
 </script>
