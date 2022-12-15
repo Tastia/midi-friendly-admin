@@ -2,7 +2,7 @@ import { darkTheme, enUS, GlobalTheme, GlobalThemeOverrides } from "naive-ui";
 import { defineStore } from "pinia";
 
 export const useAppStore = defineStore("appStore", () => {
-  const isDark = ref<boolean>(false);
+  const isDark = useStorage("app-theme", false, localStorage);
   const language = ref<typeof enUS>(enUS);
   const isLoading = ref<boolean>(false);
   const isLoadingMessage = ref<string>("");
