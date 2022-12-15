@@ -8,12 +8,20 @@ declare global {
   const $ref: typeof import('vue/macros')['$ref']
   const $shallowRef: typeof import('vue/macros')['$shallowRef']
   const $toRef: typeof import('vue/macros')['$toRef']
+  const AdminnMenuItems: typeof import('./config/navigation')['AdminnMenuItems']
+  const ChangeRgbaOpacity: typeof import('./utils/data/color')['ChangeRgbaOpacity']
   const ComputeStyleModifier: typeof import('./utils/dom/styleUtils')['ComputeStyleModifier']
+  const ConvertHexToRgba: typeof import('./utils/data/color')['ConvertHexToRgba']
   const DarkThemeOverrides: typeof import('./config/themeOverrides')['DarkThemeOverrides']
+  const DataMapperRemote: typeof import('./utils/components/dataTable')['DataMapperRemote']
   const DefaultThemeOverrides: typeof import('./config/themeOverrides')['DefaultThemeOverrides']
   const EffectScope: typeof import('vue')['EffectScope']
   const ExtractFromParenthesis: typeof import('./utils/format')['ExtractFromParenthesis']
+  const GetColorFormat: typeof import('./utils/data/color')['GetColorFormat']
   const LightThemeOverrides: typeof import('./config/themeOverrides')['LightThemeOverrides']
+  const OrganizationMenuItems: typeof import('./config/navigation')['OrganizationMenuItems']
+  const RemoveNullFromObject: typeof import('./utils/data/object')['RemoveNullFromObject']
+  const RestaurantTableSchema: typeof import('./schemas/restaurant.schema')['RestaurantTableSchema']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const capitalize: typeof import('./utils/format')['capitalize']
@@ -51,6 +59,7 @@ declare global {
   const formatProctoringMode: typeof import('./utils/format')['formatProctoringMode']
   const formatTime: typeof import('./utils/format')['formatTime']
   const formatTimeFromTimestamp: typeof import('./utils/format')['formatTimeFromTimestamp']
+  const generateUUID: typeof import('./utils/generator/uuid')['generateUUID']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const h: typeof import('vue')['h']
@@ -84,6 +93,7 @@ declare global {
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
+  const pipeMergeObject: typeof import('./utils/data/object')['pipeMergeObject']
   const provide: typeof import('vue')['provide']
   const reactify: typeof import('@vueuse/core')['reactify']
   const reactifyObject: typeof import('@vueuse/core')['reactifyObject']
@@ -106,6 +116,7 @@ declare global {
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
+  const sleep: typeof import('./utils/other/sleep')['sleep']
   const syncRef: typeof import('@vueuse/core')['syncRef']
   const syncRefs: typeof import('@vueuse/core')['syncRefs']
   const templateRef: typeof import('@vueuse/core')['templateRef']
@@ -213,6 +224,7 @@ declare global {
   const useMouseInElement: typeof import('@vueuse/core')['useMouseInElement']
   const useMousePressed: typeof import('@vueuse/core')['useMousePressed']
   const useMutationObserver: typeof import('@vueuse/core')['useMutationObserver']
+  const useNavigationMenu: typeof import('./composables/useNavigationMenu')['useNavigationMenu']
   const useNavigatorLanguage: typeof import('@vueuse/core')['useNavigatorLanguage']
   const useNetwork: typeof import('@vueuse/core')['useNetwork']
   const useNow: typeof import('@vueuse/core')['useNow']
@@ -311,12 +323,20 @@ declare module 'vue' {
     readonly $ref: UnwrapRef<typeof import('vue/macros')['$ref']>
     readonly $shallowRef: UnwrapRef<typeof import('vue/macros')['$shallowRef']>
     readonly $toRef: UnwrapRef<typeof import('vue/macros')['$toRef']>
+    readonly AdminnMenuItems: UnwrapRef<typeof import('./config/navigation')['AdminnMenuItems']>
+    readonly ChangeRgbaOpacity: UnwrapRef<typeof import('./utils/data/color')['ChangeRgbaOpacity']>
     readonly ComputeStyleModifier: UnwrapRef<typeof import('./utils/dom/styleUtils')['ComputeStyleModifier']>
+    readonly ConvertHexToRgba: UnwrapRef<typeof import('./utils/data/color')['ConvertHexToRgba']>
     readonly DarkThemeOverrides: UnwrapRef<typeof import('./config/themeOverrides')['DarkThemeOverrides']>
+    readonly DataMapperRemote: UnwrapRef<typeof import('./utils/components/dataTable')['DataMapperRemote']>
     readonly DefaultThemeOverrides: UnwrapRef<typeof import('./config/themeOverrides')['DefaultThemeOverrides']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly ExtractFromParenthesis: UnwrapRef<typeof import('./utils/format')['ExtractFromParenthesis']>
+    readonly GetColorFormat: UnwrapRef<typeof import('./utils/data/color')['GetColorFormat']>
     readonly LightThemeOverrides: UnwrapRef<typeof import('./config/themeOverrides')['LightThemeOverrides']>
+    readonly OrganizationMenuItems: UnwrapRef<typeof import('./config/navigation')['OrganizationMenuItems']>
+    readonly RemoveNullFromObject: UnwrapRef<typeof import('./utils/data/object')['RemoveNullFromObject']>
+    readonly RestaurantTableSchema: UnwrapRef<typeof import('./schemas/restaurant.schema')['RestaurantTableSchema']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly capitalize: UnwrapRef<typeof import('./utils/format')['capitalize']>
@@ -354,6 +374,7 @@ declare module 'vue' {
     readonly formatProctoringMode: UnwrapRef<typeof import('./utils/format')['formatProctoringMode']>
     readonly formatTime: UnwrapRef<typeof import('./utils/format')['formatTime']>
     readonly formatTimeFromTimestamp: UnwrapRef<typeof import('./utils/format')['formatTimeFromTimestamp']>
+    readonly generateUUID: UnwrapRef<typeof import('./utils/generator/uuid')['generateUUID']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -387,6 +408,7 @@ declare module 'vue' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
+    readonly pipeMergeObject: UnwrapRef<typeof import('./utils/data/object')['pipeMergeObject']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
     readonly reactifyObject: UnwrapRef<typeof import('@vueuse/core')['reactifyObject']>
@@ -409,6 +431,7 @@ declare module 'vue' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly sleep: UnwrapRef<typeof import('./utils/other/sleep')['sleep']>
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
     readonly syncRefs: UnwrapRef<typeof import('@vueuse/core')['syncRefs']>
     readonly templateRef: UnwrapRef<typeof import('@vueuse/core')['templateRef']>
@@ -516,6 +539,7 @@ declare module 'vue' {
     readonly useMouseInElement: UnwrapRef<typeof import('@vueuse/core')['useMouseInElement']>
     readonly useMousePressed: UnwrapRef<typeof import('@vueuse/core')['useMousePressed']>
     readonly useMutationObserver: UnwrapRef<typeof import('@vueuse/core')['useMutationObserver']>
+    readonly useNavigationMenu: UnwrapRef<typeof import('./composables/useNavigationMenu')['useNavigationMenu']>
     readonly useNavigatorLanguage: UnwrapRef<typeof import('@vueuse/core')['useNavigatorLanguage']>
     readonly useNetwork: UnwrapRef<typeof import('@vueuse/core')['useNetwork']>
     readonly useNow: UnwrapRef<typeof import('@vueuse/core')['useNow']>

@@ -30,7 +30,24 @@ export default defineConfig({
     }),
     WindiCSS(),
     Pages({
-      dirs: ["src/pages"],
+      dirs: [
+        { dir: "src/pages/auth", baseRoute: "auth" },
+        { dir: "src/pages/admin", baseRoute: "admin" },
+        { dir: "src/pages/general", baseRoute: "" },
+      ],
+      extendRoute: (route) => {
+        const entity = route.component.replace("/src/pages/", "").split("/")[0];
+        return {
+          ...route,
+          name: `${entity ? entity + "." : ""}${route.name}`,
+          meta: {
+            ...(route?.meta ?? {}),
+            ...(["admin", "organization"].includes(entity) && {
+              auth: route?.meta?.auth ?? true,
+            }),
+          },
+        };
+      },
     }),
     Layouts({
       layoutsDirs: "src/layouts",
@@ -53,8 +70,9 @@ export default defineConfig({
       dts: "src/auto-imports.d.ts",
       dirs: [
         "src/composables",
-        "src/composables/**",
+        "src/composables",
         "src/stores",
+        "src/schemas",
         "src/libs",
         "src/utils",
         "src/config",

@@ -3,6 +3,7 @@ import { createPinia } from "pinia";
 import NaiveUI from "naive-ui";
 import router from "./router";
 
+import "~/assets/styles/_main.scss";
 import "virtual:windi.css";
 import App from "./App.vue";
 
