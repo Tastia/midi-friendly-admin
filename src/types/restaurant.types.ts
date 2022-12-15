@@ -1,0 +1,31 @@
+import { Organization } from "./organization.type";
+import { User } from "./user.types";
+
+export type Restaurant = {
+  _id: string;
+  name: string;
+  organization: Organization;
+  photos: Array<{ reference: string; width: string; height: string }>;
+  priceLevel: number;
+  address: {
+    street: string;
+    city: string;
+    zip: string;
+    country: string;
+  };
+  openingHours: string[];
+  reviews: {
+    google: Array<{
+      authorName: string;
+      authorPhoto: string;
+      rating: string;
+      text: string;
+      createdAt: string;
+    }>;
+    internal: Array<{
+      user: User;
+      rating: number;
+      text?: string;
+    }>;
+  };
+};
