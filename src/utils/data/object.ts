@@ -1,3 +1,5 @@
+import { deepmerge } from "deepmerge-ts";
+
 export const RemoveNullFromObject = (obj: { [key: string]: any }) => {
   const newObj = {} as { [key: string]: any };
   for (const key in obj) {
@@ -9,3 +11,6 @@ export const RemoveNullFromObject = (obj: { [key: string]: any }) => {
 
   return newObj;
 };
+
+export const pipeMergeObject = <T>(...args: T[]) =>
+  args.reduce((acc, curr) => deepmerge(acc, curr), {});

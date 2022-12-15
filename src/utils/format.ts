@@ -4,14 +4,14 @@ import duration from "dayjs/plugin/duration";
 dayjs.extend(duration);
 
 export const formatKey = (val: string) =>
-  val.charAt(0).toUpperCase() +
-  val
-    .split(/(?=[A-Z])/)
-    .join(" ")
-    .toLowerCase()
-    .slice(1)
-    .split("_")
-    .join(" ");
+  val?.charAt(0).toUpperCase() +
+    val
+      ?.split(/(?=[A-Z])/)
+      .join(" ")
+      .toLowerCase()
+      .slice(1)
+      .split("_")
+      .join(" ") ?? "";
 export const formatDate = (val: string) => dayjs(val).format("MMM DD, YYYY");
 export const formatDateTime = (val: string | number) =>
   dayjs(val).format("MMM DD, YYYY hh:mm");
