@@ -21,7 +21,7 @@ declare global {
   const LightThemeOverrides: typeof import('./config/themeOverrides')['LightThemeOverrides']
   const OrganizationMenuItems: typeof import('./config/navigation')['OrganizationMenuItems']
   const RemoveNullFromObject: typeof import('./utils/data/object')['RemoveNullFromObject']
-  const RestaurantTableSchema: typeof import('./schemas/restaurant.schema')['RestaurantTableSchema']
+  const RestaurantTableSchema: typeof import('./schemas/restaurant')['RestaurantTableSchema']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const capitalize: typeof import('./utils/format')['capitalize']
@@ -48,6 +48,7 @@ declare global {
   const defineComponent: typeof import('vue')['defineComponent']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
+  const emailRegex: typeof import('./utils/generator/regex')['emailRegex']
   const extendRef: typeof import('@vueuse/core')['extendRef']
   const formatDate: typeof import('./utils/format')['formatDate']
   const formatDateTime: typeof import('./utils/format')['formatDateTime']
@@ -70,6 +71,7 @@ declare global {
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
+  const isValidEmail: typeof import('./utils/data/string')['isValidEmail']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const markRaw: typeof import('vue')['markRaw']
   const nextTick: typeof import('vue')['nextTick']
@@ -336,7 +338,7 @@ declare module 'vue' {
     readonly LightThemeOverrides: UnwrapRef<typeof import('./config/themeOverrides')['LightThemeOverrides']>
     readonly OrganizationMenuItems: UnwrapRef<typeof import('./config/navigation')['OrganizationMenuItems']>
     readonly RemoveNullFromObject: UnwrapRef<typeof import('./utils/data/object')['RemoveNullFromObject']>
-    readonly RestaurantTableSchema: UnwrapRef<typeof import('./schemas/restaurant.schema')['RestaurantTableSchema']>
+    readonly RestaurantTableSchema: UnwrapRef<typeof import('./schemas/restaurant')['RestaurantTableSchema']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly capitalize: UnwrapRef<typeof import('./utils/format')['capitalize']>
@@ -363,6 +365,7 @@ declare module 'vue' {
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly emailRegex: UnwrapRef<typeof import('./utils/generator/regex')['emailRegex']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly formatDate: UnwrapRef<typeof import('./utils/format')['formatDate']>
     readonly formatDateTime: UnwrapRef<typeof import('./utils/format')['formatDateTime']>
@@ -385,6 +388,7 @@ declare module 'vue' {
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly isValidEmail: UnwrapRef<typeof import('./utils/data/string')['isValidEmail']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>

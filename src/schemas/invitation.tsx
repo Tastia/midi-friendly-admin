@@ -35,7 +35,7 @@ export function InvitationTableSchema(): DataTableSchema<Invitation> {
       {
         label: "Max usage (link type)",
         key: "maxUsage",
-        render: formatNullableText,
+        // render: formatNullableText,
       },
       { label: "Usage progress", key: "usage", render: RenderInvitationUsage },
       { label: "Created at", key: "createdAt", render: formatDate },

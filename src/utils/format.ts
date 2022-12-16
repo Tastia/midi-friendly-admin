@@ -37,7 +37,7 @@ export const convertSecToMin = (val: number) =>
 export const capitalize = (val: string) =>
   val.charAt(0).toUpperCase() + val.slice(1);
 export const formatNullableText = (val: string | null | undefined) =>
-  val || "N/A";
+  val?.toString() ?? "N/A";
 export const decapitalize = (val: string) =>
   val.charAt(0).toLowerCase() + val.slice(1);
 export const ExtractFromParenthesis = (string: string) => {
