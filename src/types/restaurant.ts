@@ -7,6 +7,10 @@ export type Restaurant = {
   organization: Organization;
   photos: Array<{ reference: string; width: string; height: string }>;
   priceLevel: number;
+  coordinates: {
+    longitude: number;
+    latitude: number;
+  };
   address: {
     street: string;
     city: string;
@@ -28,4 +32,6 @@ export type Restaurant = {
       text?: string;
     }>;
   };
+  createdAt: string;
+  updatedAt: string;
 };

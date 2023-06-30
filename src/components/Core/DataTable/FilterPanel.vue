@@ -25,7 +25,7 @@
         <template #header>
           <div class="flex items-center justify-start py-2">
             <n-icon class="mr-2">
-              <mdi-filter-variant />
+              <i:mdi-filter-variant />
             </n-icon>
             <span
               >Filters
@@ -54,7 +54,7 @@
             <NButton type="error" class="w-full" @click="ResetFilters">
               <template #icon>
                 <n-icon>
-                  <system-uicons:reset />
+                  <i:system-uicons:reset />
                 </n-icon>
               </template>
               RESET
@@ -63,7 +63,7 @@
             <NButton type="primary" class="w-full" @click="ApplyFilters">
               <template #icon>
                 <n-icon>
-                  <la:search />
+                  <i:la:search />
                 </n-icon>
               </template>
               SEARCH

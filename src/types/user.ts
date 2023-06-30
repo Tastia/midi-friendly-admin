@@ -8,6 +8,7 @@ export enum CredentialsProviders {
 }
 
 export type User = {
+  _id: string;
   firstName: string;
   lastName: string;
   avatar?: string;
@@ -16,4 +17,8 @@ export type User = {
     email: string;
   };
   organizations: Organization[];
+  adminOrganizations: Organization[];
+  admin: boolean;
 };
+
+export type UpdateUserDto = Omit<User, "_id" | "organizations" | "credentials">;

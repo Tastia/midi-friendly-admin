@@ -1,6 +1,15 @@
-import { NDataTable, NPopover, NTable, NTag } from "naive-ui";
-import { InvitationType, InvitationUsage } from "~/types/invitation";
-import { CredentialsProviders } from "~/types/user";
+import {
+  NAvatar,
+  NAvatarGroup,
+  NDataTable,
+  NDropdown,
+  NEllipsis,
+  NPopover,
+  NTag,
+  NTooltip,
+} from "naive-ui";
+import { InvitationType, InvitationUsage } from "@/types/invitation";
+import { CredentialsProviders, User } from "@/types/user";
 
 export const RenderBoolean = (value: boolean) => (
   <span
@@ -8,6 +17,66 @@ export const RenderBoolean = (value: boolean) => (
     data-icon={value ? "mdi:check" : "mdi:close"}
   />
 );
+
+export const RenderEllipsisText = (value: string) => (
+  <NEllipsis>{value}</NEllipsis>
+);
+
+export const RenderUser = (fullName: string, avatar?: string) => (
+  <NTooltip>
+    {{
+      default: () => <span>{fullName}</span>,
+      trigger: () =>
+        avatar ? (
+          <NAvatar round src={avatar} />
+        ) : (
+          <NAvatar round>
+            {fullName
+              .split(" ")
+              .map((w: string) => w.charAt(0))
+              .join("")}
+          </NAvatar>
+        ),
+    }}
+  </NTooltip>
+);
+
+export const RenderUserStack = (users: User[]) => {
+  function createDropdownOptions(
+    options: Array<{ name: string; src?: string }>
+  ) {
+    return options.map((option, index) => ({
+      key: index,
+      label: option.name,
+    }));
+  }
+
+  function mapUsersAvatar(users: User[], max = 3) {
+    return users.map((user) => ({
+      name: `${user.firstName} ${user.lastName}`,
+      src: user?.avatar ?? "",
+    }));
+  }
+  return (
+    <NAvatarGroup options={mapUsersAvatar(users)} size={40} max={3}>
+      {{
+        avatar: ({ option }: { option: { name: string; src?: string } }) =>
+          RenderUser(option.name, option.src),
+        rest: ({
+          options,
+          rest,
+        }: {
+          options: { name: string; src?: string }[];
+          rest: number;
+        }) => (
+          <NDropdown options={createDropdownOptions(options)} placement="top">
+            <NAvatar>+{{ rest }}</NAvatar>
+          </NDropdown>
+        ),
+      }}
+    </NAvatarGroup>
+  );
+};
 
 export const RenderCredentialsType = (type: `${CredentialsProviders}`) => {
   const providerIcon =

@@ -1,8 +1,9 @@
 import { darkTheme, enUS, GlobalTheme, GlobalThemeOverrides } from "naive-ui";
 import { defineStore } from "pinia";
+import { useStorage as useVStorage } from "@vueuse/core";
 
 export const useAppStore = defineStore("appStore", () => {
-  const isDark = useStorage("app-theme", false, localStorage);
+  const isDark = useVStorage("app-theme", false, localStorage);
   const language = ref<typeof enUS>(enUS);
   const isLoading = ref<boolean>(false);
   const isLoadingMessage = ref<string>("");

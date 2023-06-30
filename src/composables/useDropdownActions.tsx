@@ -1,3 +1,4 @@
+import { DropdownMixedOption } from "naive-ui/lib/dropdown/src/interface";
 import { ComputedRef, VNodeChild } from "vue";
 import { computed } from "vue";
 import { RouteLocationRaw } from "vue-router";
@@ -9,7 +10,7 @@ export interface DropdownAction {
   action?: () => void;
   link?: string | RouteLocationRaw;
   disable?: boolean | (() => boolean);
-  hide?: boolean | (() => boolean);
+  show?: boolean | (() => boolean);
   permissions?: (string | string[])[];
 }
 
@@ -25,22 +26,19 @@ export interface MappedDropdownAction {
 
 export const useDropdownActions: (
   actions: DropdownAction[]
-) => ComputedRef<MappedDropdownAction[]> = (actions) => {
+) => ComputedRef<DropdownMixedOption[]> = (actions) => {
   return computed(() =>
     actions
       .map((action: DropdownAction) => ({
         label: action.link
-          ? () => <router-link to={action.link}>{action.label}</router-link>
+          ? () => <nuxt-link to={action.link}>{action.label}</nuxt-link>
           : action.label,
         ...(action.icon && { icon: renderIcon(action.icon) }),
         disabled:
           typeof action.disable === "function"
             ? action.disable()
             : action?.disable ?? false,
-        hidden:
-          typeof action.hide === "function"
-            ? action.hide()
-            : action?.hide ?? false,
+        hidden: typeof action.show === "function" ? !action.show() : false,
         props: {
           onClick: () => action?.action?.(),
         },

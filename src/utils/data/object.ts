@@ -13,4 +13,32 @@ export const RemoveNullFromObject = (obj: { [key: string]: any }) => {
 };
 
 export const pipeMergeObject = <T>(...args: T[]) =>
-  args.reduce((acc, curr) => deepmerge(acc, curr), {});
+  args.reduce((acc, curr) => deepmerge(acc as any, curr as any), {});
+
+export const ObjectSerializer = {
+  read: (string: string) => {
+    try {
+      return JSON.parse(string);
+    } catch (err) {
+      return string;
+    }
+  },
+  write: (value: Record<string, any> | null) =>
+    value ? JSON.stringify(value) : value,
+};
+
+export const resolveFromStringPath = (
+  path: string,
+  obj: { [key: string]: any },
+  separator = "."
+) => {
+  try {
+    const properties: string[] = Array.isArray(path)
+      ? path
+      : path.split(separator);
+    const value = properties.reduce((prev, curr) => prev && prev[curr], obj);
+    return value;
+  } catch (err) {
+    return undefined;
+  }
+};

@@ -13,14 +13,16 @@ import {
   TableAction,
   TableApi,
 } from "./types";
-import { useSweetform } from "@chronicstone/vue-sweetforms";
-import { RemovableRef, useStorage } from "@vueuse/core";
+import { RemovableRef } from "@vueuse/core";
 import { useMessage } from "naive-ui";
 import { computed, onMounted, reactive, watch, Ref, ref } from "vue";
 import { useRoute } from "vue-router";
-// import { usePermission } from "~/composables/usePermission";
-import { sleep } from "~/utils/other/sleep";
-import { renderIcon } from "~/utils/vue/renderIcon";
+import { sleep } from "@/utils/other/sleep";
+import { renderIcon } from "@/utils/vue/renderIcon";
+import { DataMapperRemote } from "@/utils/components/dataTable";
+import { generateUUID } from "@/utils/generator/uuid";
+import { pipeMergeObject } from "@/utils/data/object";
+import { useStorage as useLStorage } from "@vueuse/core";
 
 export const useClientTable = ({
   columns,
@@ -77,7 +79,7 @@ export const useClientTable = ({
     ),
   });
 
-  const gridControls: RemovableRef<GridControls> = useStorage(
+  const gridControls: RemovableRef<GridControls> = useLStorage(
     `${tableKey || route.name?.toString()}__#gridControls`,
     {
       sort: {

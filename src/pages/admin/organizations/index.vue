@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { OrganizationTableSchema } from "~/schemas/organization";
 
+definePageMeta({
+  name: "admin.organizations",
+  middleware: ["auth"],
+});
+
 const schema = OrganizationTableSchema();
 </script>
 
 <template>
-  <DataTable v-bind="schema">Organizations</DataTable>
+  <CoreDataTable v-bind="schema">Organizations</CoreDataTable>
 </template>
-
-<route lang="yaml">
-name: organizations
-</route>

@@ -25,6 +25,9 @@ export const DefaultThemeOverrides = {
   Tag: {
     borderRadius: "6px",
   },
+  LoadingBar: {
+    height: "4.5px",
+  },
 };
 
 const _lightThemeOverrides = {
@@ -43,13 +46,13 @@ const _darkThemeOverrides = {
     popoverColor: "#1A1A1A",
   },
   Input: {
-    color: "rgba(62, 64, 83, 1)",
+    color: "#363434",
   },
   InternalSelection: {
-    color: "rgba(62, 64, 83, 1)",
+    color: "#363434",
   },
   ColorPicker: {
-    color: "rgba(62, 64, 83, 1)",
+    color: "#363434",
   },
   Slider: {
     fillColor: "rgba(185, 38, 180, 1)",

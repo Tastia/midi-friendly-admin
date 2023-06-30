@@ -12,9 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { useElementSize } from "@vueuse/core";
-import { ref } from "vue";
-import { useAppStore } from "~/stores/app.store";
+import { renderVNode } from "@/utils/vue/renderVNode";
 
 const props = defineProps({
   params: {

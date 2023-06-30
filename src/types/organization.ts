@@ -1,3 +1,5 @@
+import { Restaurant } from "@/types/restaurant";
+
 export type Organization = {
   _id: string;
   name: string;
@@ -8,13 +10,14 @@ export type Organization = {
     country: string;
   };
   coordinates: {
-    longitude: string;
-    latitude: string;
+    longitude: number;
+    latitude: number;
   };
+  restaurants: Restaurant[];
   createdAt: string;
   updatedAt: string;
 };
 
 export type OrganizationList = Array<Omit<Organization, "">>;
 
-export type CreateOrganizationDto = Omit<Organization, "_id coordinates">;
+export type CreateOrganizationDto = Omit<Organization, "_id" | "coordinates">;

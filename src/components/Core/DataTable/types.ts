@@ -1,6 +1,6 @@
 import { ComputedRef, Ref, VNodeChild, WritableComputedRef } from "vue";
 import { RouteLocationRaw } from "vue-router";
-import { GenericObject, NestedPaths, TypeFromPath } from "~/types/_utils";
+import { GenericObject, NestedPaths, TypeFromPath } from "@/types/_utils";
 
 export type FilterMatchMode =
   | "arrayContains"
@@ -9,7 +9,8 @@ export type FilterMatchMode =
   | "equals"
   | "exists"
   | "objectStringMap"
-  | "arrayLength";
+  | "arrayLength"
+  | "arrayContainsObject";
 export type FilterType =
   | "text"
   | "select"

@@ -1,5 +1,5 @@
-import { User } from "~/types/user";
-import { Organization } from "~/types/organization";
+import { User } from "@/types/user";
+import { Organization } from "@/types/organization";
 
 export enum InvitationType {
   email = "email",

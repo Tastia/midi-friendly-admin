@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { UserTableSchema } from "~/schemas/user";
 
+definePageMeta({
+  name: "admin.users",
+  middleware: ["auth"],
+});
+
 const tableSchema = UserTableSchema();
 </script>
 
 <template>
-  <DataTable v-bind="tableSchema">Users</DataTable>
+  <CoreDataTable v-bind="tableSchema">Users</CoreDataTable>
 </template>
-
-<route lang="yaml">
-name: users
-</route>

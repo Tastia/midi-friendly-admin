@@ -54,3 +54,24 @@ export const TimePeriodFilter: FilterFactory = (
   matchMode: "between",
   params: { dateMode: true },
 });
+
+export const OrganizationFilter: FilterFactory = (key: string) => ({
+  key,
+  label: "Organization",
+  type: "select",
+  options: GetOrganizations,
+  matchMode: "arrayContains",
+});
+
+export const CredentialProviderFilter: FilterFactory = (key: string) => ({
+  key,
+  label: "Credential Provider",
+  type: "select",
+  options: [
+    { label: "Email", value: "email" },
+    { label: "Google", value: "google" },
+    { label: "Facebook", value: "facebook" },
+    { label: "LinkedIn", value: "linkedin" },
+  ],
+  matchMode: "arrayContains",
+});

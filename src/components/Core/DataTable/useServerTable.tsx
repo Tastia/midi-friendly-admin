@@ -17,7 +17,12 @@ import {
 } from "./types";
 import { useMessage } from "naive-ui";
 import { useRoute } from "vue-router";
-import { RemovableRef } from "@vueuse/core";
+import { RemovableRef, useStorage as useLStorage } from "@vueuse/core";
+import { pipeMergeObject } from "@/utils/data/object";
+import { sleep } from "@/utils/other/sleep";
+import { renderIcon } from "@/utils/vue/renderIcon";
+import { generateUUID } from "@/utils/generator/uuid";
+import { Ref } from "vue";
 
 export const useServerTable = (props: any) => {
   const {
@@ -77,7 +82,7 @@ export const useServerTable = (props: any) => {
     ),
   });
 
-  const gridControls: RemovableRef<GridControls> = useStorage(
+  const gridControls: RemovableRef<GridControls> = useLStorage(
     `${tableKey.value}__${route.name?.toString()}__#gridControls`,
     {
       sort: {

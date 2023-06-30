@@ -1,7 +1,9 @@
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(duration);
+dayjs.extend(relativeTime);
 
 export const formatKey = (val: string) =>
   val?.charAt(0).toUpperCase() +
@@ -21,13 +23,9 @@ export const formatDateToISOstring = (val: string) =>
 export const formatTime = (val: string | number) =>
   dayjs.duration(+val * 1000).format("mm:ss");
 export const formatTimeFromTimestamp = (val: string | number) =>
-  dayjs(val).format("h:mm A");
-export const formatProctoringMode = (val: "online" | "onsite" | "general") =>
-  val === "general"
-    ? "Standard proctoring"
-    : val === "online"
-    ? "Online proctoring"
-    : "Onsite proctoring";
+  dayjs(val).format("HH:mm");
+export const formatTimeFromNow = (val: string | number) =>
+  dayjs(val).fromNow(true);
 export const trim = (val: number | string, decimals = 2) =>
   (+val).toFixed(decimals);
 export const formatPhoneNumber = (val: string) =>
@@ -37,7 +35,7 @@ export const convertSecToMin = (val: number) =>
 export const capitalize = (val: string) =>
   val.charAt(0).toUpperCase() + val.slice(1);
 export const formatNullableText = (val: string | null | undefined) =>
-  val || "N/A";
+  val?.toString() ?? "N/A";
 export const decapitalize = (val: string) =>
   val.charAt(0).toLowerCase() + val.slice(1);
 export const ExtractFromParenthesis = (string: string) => {

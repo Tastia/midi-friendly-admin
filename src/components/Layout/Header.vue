@@ -1,7 +1,9 @@
 <script setup lang="tsx">
 import { useThemeVars } from "naive-ui";
 import { PropType } from "vue";
-import { useDropdownActions } from "~/composables/useDropdownActions";
+import { useDropdownActions } from "@/composables/useDropdownActions";
+
+const isSmallDevice = useIsMobile();
 
 defineEmits(["openSideNav"]);
 defineProps({
@@ -23,6 +25,10 @@ const userDropdownActions = useDropdownActions([
   {
     label: "Logout",
     icon: "ic:twotone-logout",
+    action: async () => {
+      await userStore.ClearUserSession();
+      navigateTo("/auth/login");
+    },
   },
 ]);
 </script>
@@ -32,20 +38,31 @@ const userDropdownActions = useDropdownActions([
     <div class="layout-header">
       <div class="layout-header-left">
         <div class="flex items-center gap-2 text-lg uppercase ml-4">
+          <div
+            v-if="isSmallDevice"
+            id="ToggleMenuTrigger"
+            class="ml-1 layout-header-trigger layout-header-trigger-min"
+            @click="$emit('openSideNav')"
+          >
+            <n-icon size="25">
+              <i:charm:menu-hamburger />
+            </n-icon>
+          </div>
+          <NDivider v-if="isSmallDevice" vertical class="" />
           <span>{{ routeTitle.label }}</span>
         </div>
       </div>
+
       <div class="flex items-center pr-4">
-        <ToggleTheme />
+        <LayoutToggleTheme />
+
         <n-divider vertical />
         <n-dropdown trigger="click">
           <div class="avatar">
             <n-dropdown placement="bottom-end" :options="userDropdownActions">
               <n-avatar round>
-                {{
-                  userStore.user?.firstName?.charAt().toUpperCase() +
-                  userStore.user?.lastName?.charAt().toUpperCase()
-                }}
+                {{ userStore.user?.firstName?.charAt(0) }}
+                {{ userStore.user?.lastName?.charAt(0) }}
               </n-avatar>
             </n-dropdown>
           </div>
@@ -164,9 +181,9 @@ const userDropdownActions = useDropdownActions([
   }
 
   .layout-header-left {
-    ::v-deep(.n-breadcrumb
-        .n-breadcrumb-item:last-child
-        .n-breadcrumb-item__link) {
+    ::v-deep(
+        .n-breadcrumb .n-breadcrumb-item:last-child .n-breadcrumb-item__link
+      ) {
       color: #515a6e;
     }
   }

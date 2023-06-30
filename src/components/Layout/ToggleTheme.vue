@@ -1,3 +1,11 @@
+<script setup lang="ts">
+const appStore = useAppStore();
+withDefaults(
+  defineProps<{ buttonClass?: string; disableTooltip?: boolean }>(),
+  { disableTooltip: false, buttonClass: "" }
+);
+</script>
+
 <template>
   <n-tooltip placement="bottom" :disabled="disableTooltip">
     <template #trigger>
@@ -10,11 +18,11 @@
           :name="appStore.isDark ? 'slide-fade' : 'slide-fade-reverse'"
           mode="out-in"
         >
-          <mdi-white-balance-sunny
+          <i:mdi-white-balance-sunny
             v-if="appStore.isDark"
             class="transition-all ease-in-out duration-150 transform"
           />
-          <ic-baseline-dark-mode
+          <i:ic-baseline-dark-mode
             v-else
             class="transition-all ease-in-out duration-150 transform"
           />
@@ -24,11 +32,3 @@
     <span>{{ appStore.isDark ? "Light" : "Dark" }}</span>
   </n-tooltip>
 </template>
-
-<script setup lang="ts">
-const appStore = useAppStore();
-withDefaults(
-  defineProps<{ buttonClass?: string; disableTooltip?: boolean }>(),
-  { disableTooltip: false, buttonClass: "" }
-);
-</script>

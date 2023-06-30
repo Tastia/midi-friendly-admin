@@ -1,7 +1,6 @@
 import { RemoveNullFromObject } from "~/utils/data/object";
 import ActionsCellRenderer from "./RootCellRenderers/ActionsCellRenderer.vue";
 import ComponentCellRenderer from "./RootCellRenderers/ComponentCellRenderer.vue";
-import FieldHeaderRenderer from "./RootCellRenderers/FieldHeaderRenderer.vue";
 import FloatingFilterRenderer from "./RootCellRenderers/FloatingFilterRenderer.vue";
 import JsxCellRenderer from "./RootCellRenderers/JsxCellRenderer.vue";
 import SelectionHeaderRenderer from "./RootCellRenderers/SelectionHeaderRenderer.vue";

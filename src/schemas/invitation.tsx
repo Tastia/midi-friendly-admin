@@ -1,6 +1,5 @@
 import { FormSchema } from "@chronicstone/vue-sweetforms";
-import { UserController } from "~/api/controllers/user.controller";
-import { DataTableSchema } from "~/components/Core/DataTable/types";
+import { DataTableSchema } from "@/components/Core/DataTable/types";
 import {
   Invitation,
   InvitationTargetApp,
@@ -14,10 +13,22 @@ import {
   RenderInvitationUsage,
 } from "./utils/renderer";
 import { GetOrganizations } from "./utils/resolver";
+import { isValidEmail } from "../utils/data/string";
 
-export function InvitationTableSchema(): DataTableSchema<Invitation> {
+export function InvitationTableSchema(
+  organizationId?: string
+): DataTableSchema<Invitation> {
   return {
     remote: false,
+    staticFilters: organizationId
+      ? [
+          {
+            key: "organization._id",
+            value: organizationId,
+            matchMode: "equals",
+          },
+        ]
+      : [],
     columns: [
       { label: "Type", key: "type", render: RenderInvitationType, width: 110 },
       {
@@ -35,7 +46,7 @@ export function InvitationTableSchema(): DataTableSchema<Invitation> {
       {
         label: "Max usage (link type)",
         key: "maxUsage",
-        render: formatNullableText,
+        // render: formatNullableText,
       },
       { label: "Usage progress", key: "usage", render: RenderInvitationUsage },
       { label: "Created at", key: "createdAt", render: formatDate },

@@ -1,8 +1,9 @@
 import { FetchParams } from "~/components/Core/DataTable/types";
+import { resolveFromStringPath } from "../data/object";
 
 export const DataMapperRemote = async (
   datasource: () => Promise<any[]>,
-  { searchQuery, page, limit, sortKey, sortOrder }: FetchParams
+  { searchQuery, page, limit, sortKey, sortOrder, query }: FetchParams
 ): Promise<{ totalDocs: number; totalPages: number; docs: any[] }> => {
   try {
     let output = (await datasource()) || [];
@@ -33,6 +34,29 @@ export const DataMapperRemote = async (
         if (aValue > bValue) return sortOrder === "asc" ? 1 : -1;
         if (aValue < bValue) return sortOrder === "asc" ? -1 : 1;
       });
+    }
+
+    if (query && Object.keys(query).length > 0) {
+      for (const key in query) {
+        const filters = query[key];
+        output = output.filter((item) => {
+          const value: any = resolveFromStringPath(key, item);
+          for (const filter of filters) {
+            if (filter.matchMode === "equals") {
+              console.log({ filter: filter.value, value: value });
+
+              return !!(filter.value === value);
+            }
+            if (filter.matchMode === "contains")
+              return !!(item[key] && value.includes(filter.value));
+            if (filter.matchMode === "between")
+              return !!(value >= filter.value[0] && value <= filter.value[1]);
+            if (filter.matchMode === "arrayContains")
+              return !!(item[key] && filter.value.includes(item[key]));
+          }
+          return false;
+        });
+      }
     }
 
     const totalDocs = output.length;

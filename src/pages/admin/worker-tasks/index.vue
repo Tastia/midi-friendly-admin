@@ -1,7 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+definePageMeta({
+  name: "admin.workerTasks",
+  middleware: ["auth"],
+});
+</script>
 
-<template>Users</template>
-
-<route lang="yaml">
-name: workerTasks
-</route>
+<template>Worker tasks</template>

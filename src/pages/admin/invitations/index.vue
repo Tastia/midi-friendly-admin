@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { InvitationTableSchema } from "~/schemas/invitation";
+import { InvitationTableSchema } from "@/schemas/invitation";
+
+definePageMeta({
+  name: "admin.invitations",
+  middleware: ["auth"],
+});
 
 const schema = InvitationTableSchema();
 </script>
 
 <template>
-  <DataTable v-bind="schema">Invitations</DataTable>
+  <CoreDataTable v-bind="schema">Invitations</CoreDataTable>
 </template>
-
-<route lang="yaml">
-name: invitations
-</route>

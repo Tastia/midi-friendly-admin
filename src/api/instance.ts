@@ -1,17 +1,18 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { useReactifiedApi } from "~/composables/useReactifiedApi";
+import { useReactifiedApi } from "@/composables/useReactifiedApi";
 import { useUserStore } from "~/stores/user.store";
 
 export const ApiInstance = axios.create({
   baseURL: `${
     import.meta.env?.VITE_API_URL ?? "http://localhost:3333"
-  }/api` as string,
+  }` as string,
 });
 
 ApiInstance.interceptors.request.use((config) => {
   const userStore = useUserStore();
   config.headers = {
     ...config.headers,
+    "x-application": "admin",
     ...((userStore.accessToken && {
       Authorization: `Bearer ${userStore.accessToken}`,
     }) as any),
@@ -24,7 +25,7 @@ ApiInstance.interceptors.response.use(
   (error: AxiosError) => {
     const { messageApi } = useReactifiedApi();
     if (error.config?.url === "/auth/login" && error.response?.status === 401) {
-      messageApi.error("Invalid credentials");
+      messageApi.error("Identifiants incorrects");
     } else if ((error.response?.data as { message: string })?.message) {
       const rawMsg = (error.response?.data as { message: string })?.message;
       if (Array.isArray(rawMsg))

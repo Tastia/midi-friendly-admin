@@ -1,7 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+definePageMeta({
+  name: "admin.restaurants",
+  middleware: ["auth"],
+});
 
-<template>Users</template>
+const schema = RestaurantTableSchema();
+</script>
 
-<route lang="yaml">
-name: restaurants
-</route>
+<template>
+  <CoreDataTable v-bind="schema" />
+</template>

@@ -1,7 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { LunchGroupTableSchema } from "@/schemas/lunchGroup";
 
-<template>Users</template>
+definePageMeta({
+  name: "admin.lunchGroups",
+  middleware: ["auth"],
+});
 
-<route lang="yaml">
-name: lunchGroups
-</route>
+const schema = LunchGroupTableSchema();
+</script>
+
+<template>
+  <CoreDataTable v-bind="schema">Lunch groups</CoreDataTable>
+</template>

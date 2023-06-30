@@ -1,62 +1,91 @@
-import { NavigationMenuItem } from "~/types/_navitation";
+import { MenuItemSection } from "@/types/_navigation";
 
-export const AdminnMenuItems: Array<NavigationMenuItem> = [
-  {
-    label: "Organizations",
-    icon: "mdi:office-building",
-    key: "admin.organizations",
-  },
-  {
-    label: "Users",
-    icon: "ph:users-three-fill",
-    key: "admin.users",
-  },
-  {
-    label: "Invitations",
-    icon: "ph:users-three-fill",
-    key: "admin.invitations",
-  },
-  {
-    label: "Restaurants",
-    icon: "ic:baseline-restaurant",
-    key: "admin.restaurants",
-  },
-  {
-    label: "Lunch groups",
-    icon: "material-symbols:group-add",
-    key: "admin.lunchGroups",
-  },
-  {
-    label: "Worker tasks",
-    icon: "material-symbols:admin-panel-settings",
-    key: "admin.workerTasks",
-  },
-];
+const GeneralSection: MenuItemSection = {
+  label: "Home",
+  icon: "ph:house-line-duotone",
+  slug: "general.home",
+};
 
-export const OrganizationMenuItems: Array<NavigationMenuItem> = [
-  {
-    label: "Organizations",
-    icon: "mdi:office-building",
-    key: "admin.organizations",
+const AdminSection: MenuItemSection = {
+  label: "Administration",
+  icon: "ph:shield-check-duotone",
+  slug: "admin",
+  condition: (userStore) => {
+    console.log(!!userStore.user?.admin);
+    return !!userStore.user?.admin;
   },
-  {
-    label: "Users",
-    icon: "ph:users-three-fill",
-    key: "admin.users",
-  },
-  {
-    label: "Restaurants",
-    icon: "ic:baseline-restaurant",
-    key: "admin.restaurants",
-  },
-  {
-    label: "Lunch groups",
-    icon: "material-symbols:group-add",
-    key: "admin.lunchGroups",
-  },
-  {
-    label: "Worker tasks",
-    icon: "material-symbols:admin-panel-settings",
-    key: "admin.workerTasks",
-  },
-];
+  items: [
+    {
+      label: "Business & entities",
+      items: [
+        {
+          label: "Organizations",
+          icon: "ph:shield-check-duotone",
+          slug: "admin.organizations",
+        },
+        {
+          label: "Restaurants",
+          icon: "ph:shield-check-duotone",
+          slug: "admin.restaurants",
+        },
+        {
+          label: "Lunch grouos",
+          icon: "ph:shield-check-duotone",
+          slug: "admin.lunchGroups",
+        },
+      ],
+    },
+    {
+      label: "Users & access",
+      items: [
+        {
+          label: "Users",
+          icon: "ph:user-duotone",
+          slug: "admin.users",
+        },
+        {
+          label: "Invitations",
+          icon: "ph:envelope-duotone",
+          slug: "admin.invitations",
+        },
+      ],
+    },
+    {
+      label: "Settings",
+      items: [
+        {
+          label: "Worker tasks",
+          icon: "ph:shield-check-duotone",
+          slug: "admin.workerTasks",
+        },
+      ],
+    },
+  ],
+};
+
+const OrganizationSection: MenuItemSection = {
+  label: "Organization",
+  icon: "ph:buildings-duotone",
+  slug: "organization",
+  entityKey: "organization",
+  condition: (userStore) => !!userStore.organizations?.length,
+  items: [
+    {
+      label: "Administration",
+      items: [
+        {
+          label: "Users",
+          icon: "ph:user-duotone",
+          slug: "organization.users",
+        },
+        {
+          label: "Invitations",
+          icon: "ph:envelope-duotone",
+          slug: "organization.invitations",
+        },
+      ],
+    },
+  ],
+};
+
+export const NavMenuItems = [AdminSection, OrganizationSection];

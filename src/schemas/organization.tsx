@@ -1,7 +1,7 @@
 import { FormSchema } from "@chronicstone/vue-sweetforms";
-import { OrganizationController } from "~/api/controllers/organization.controller";
-import { DataTableSchema } from "~/components/Core/DataTable/types";
-import { CreateOrganizationDto, OrganizationList } from "~/types/organization";
+import { DataTableSchema } from "@/components/Core/DataTable/types";
+import { CreateOrganizationDto, OrganizationList } from "@/types/organization";
+import { NAlert, NDivider } from "naive-ui";
 
 export function OrganizationTableSchema(): DataTableSchema<
   OrganizationList[number]
@@ -53,34 +53,59 @@ export function OrganizationFormSchema(
         label: "Address",
         key: "address",
         type: "object",
+        fieldParams: {
+          frameless: true,
+        },
         fields: [
           {
-            label: "Street",
+            label: "Address - Street",
             key: "street",
             type: "text",
             required: true,
             size: "8 md:4",
           },
           {
-            label: "City",
+            label: "Address - City",
             key: "city",
             type: "text",
             required: true,
             size: "8 md:4",
           },
           {
-            label: "ZIP Code",
+            label: "Address - ZIP Code",
             key: "zip",
             type: "text",
             required: true,
             size: "8 md:4",
           },
           {
-            label: "Country",
+            label: "Address - Country",
             key: "Country",
             type: "text",
             required: true,
             size: "8 md:4",
+          },
+          {
+            size: 8,
+            key: "divider",
+            type: "info",
+            content: () => (
+              <div>
+                <NDivider />
+                <span class="font-bold text-lg">
+                  Organization administrator
+                </span>
+              </div>
+            ),
+          },
+          {
+            label: "Email address",
+            key: "administratorEmail",
+            type: "text",
+            required: true,
+            description: {
+              title: "About administrator email",
+            },
           },
         ],
       },
