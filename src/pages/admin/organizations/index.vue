@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { OrganizationTableSchema } from "~/schemas/organization";
+import { DataTable } from "@chronicstone/vue-sweettools";
 
 definePageMeta({
   name: "admin.organizations",
@@ -10,5 +11,5 @@ const schema = OrganizationTableSchema();
 </script>
 
 <template>
-  <CoreDataTable v-bind="schema">Organizations</CoreDataTable>
+  <DataTable v-bind="schema">Organizations</DataTable>
 </template>

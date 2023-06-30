@@ -1,4 +1,4 @@
-import { FetchParams } from "@/components/Core/DataTable/types";
+import { FetchParams } from "@chronicstone/vue-sweettools";
 import { Restaurant } from "@/types/restaurant";
 import { ApiInstance } from "@/api/instance";
 
@@ -11,4 +11,12 @@ export const RestaurantController = {
     ApiInstance.get<Restaurant[]>("/restaurants").then(
       (response) => response.data
     ),
+  toggleRestaurant: (restaurantId: string) =>
+    ApiInstance.patch<boolean>(
+      `/restaurants/toggle-restaurant/${restaurantId}`
+    ).then((response) => response.data),
+  insertRestaurantByPlaceId: (placeId: string) =>
+    ApiInstance.post<Restaurant>(
+      `/restaurants/insert-restaurant-by-place-id/${placeId}`
+    ).then((response) => response.data),
 };

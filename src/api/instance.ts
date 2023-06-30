@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { useReactifiedApi } from "@/composables/useReactifiedApi";
 import { useUserStore } from "~/stores/user.store";
 
 export const ApiInstance = axios.create({
@@ -23,14 +22,14 @@ ApiInstance.interceptors.request.use((config) => {
 ApiInstance.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: AxiosError) => {
-    const { messageApi } = useReactifiedApi();
+    const { $messageApi } = useNuxtApp();
     if (error.config?.url === "/auth/login" && error.response?.status === 401) {
-      messageApi.error("Identifiants incorrects");
+      $messageApi.error("Identifiants incorrects");
     } else if ((error.response?.data as { message: string })?.message) {
       const rawMsg = (error.response?.data as { message: string })?.message;
       if (Array.isArray(rawMsg))
-        for (const msg of rawMsg) messageApi.error(msg);
-      else messageApi.error(rawMsg);
+        for (const msg of rawMsg) $messageApi.error(msg);
+      else $messageApi.error(rawMsg);
     }
     return Promise.reject(error);
   }

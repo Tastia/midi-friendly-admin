@@ -20,4 +20,7 @@ export type Organization = {
 
 export type OrganizationList = Array<Omit<Organization, "">>;
 
-export type CreateOrganizationDto = Omit<Organization, "_id" | "coordinates">;
+export type CreateOrganizationDto = Omit<
+  Organization,
+  "_id" | "coordinates" | "restaurants" | "createdAt" | "updatedAt"
+>;

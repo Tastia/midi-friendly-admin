@@ -1,6 +1,4 @@
 <script setup lang="ts">
-useReactifiedApi();
-
 const breadcrumbs = useBreadcrumb();
 const isSmallDevice = useIsMobile();
 const sidebarCollapsed = ref(false);

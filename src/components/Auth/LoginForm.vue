@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { Form, FormSchema } from "@chronicstone/vue-sweetforms";
-import { helpers, sameAs } from "@vuelidate/validators";
 import {
   AuthEmailCredentials,
   AuthLoginDto,
-  AuthProviderCredentials,
   AuthRegisterDto,
 } from "@/types/auth";
 

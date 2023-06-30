@@ -1,5 +1,7 @@
-import { FormSchema } from "@chronicstone/vue-sweetforms";
-import { DataTableSchema } from "@/components/Core/DataTable/types";
+import {
+  buildFormSchema,
+  buildTableSchema,
+} from "@chronicstone/vue-sweettools";
 import {
   Invitation,
   InvitationTargetApp,
@@ -15,10 +17,8 @@ import {
 import { GetOrganizations } from "./utils/resolver";
 import { isValidEmail } from "../utils/data/string";
 
-export function InvitationTableSchema(
-  organizationId?: string
-): DataTableSchema<Invitation> {
-  return {
+export function InvitationTableSchema(organizationId?: string) {
+  return buildTableSchema<Invitation>({
     remote: false,
     staticFilters: organizationId
       ? [
@@ -59,15 +59,15 @@ export function InvitationTableSchema(
         icon: "mdi:plus",
         action: ({ tableApi }) =>
           CreateInvitation().then(
-            (shouldRefresh) => shouldRefresh && tableApi.value.refreshData()
+            (shouldRefresh) => shouldRefresh && tableApi.refreshData()
           ),
       },
     ],
-  };
+  });
 }
 
-export function InvitationFormSchema(): FormSchema {
-  return {
+export function InvitationFormSchema() {
+  return buildFormSchema({
     gridSize: 8,
     fieldSize: "8 md:4",
     maxWidth: "700px",
@@ -152,9 +152,9 @@ export function InvitationFormSchema(): FormSchema {
         label: "Parsed emails:",
         type: "info",
         dependencies: ["emails"],
-        condition: (deps) => deps?.emails,
+        condition: (deps) => !!deps?.emails,
         content: (deps) => {
-          const emails = (deps?.emails ?? "")
+          const emails = ((deps?.emails ?? "") as string)
             .split("\n")
             .map((email: string) => email.trim())
             .filter(isValidEmail);
@@ -171,13 +171,13 @@ export function InvitationFormSchema(): FormSchema {
         },
       },
     ],
-  };
+  });
 }
 
 async function CreateInvitation() {
   try {
-    const { formApi, messageApi } = useReactifiedApi();
-    const { isCompleted, formData } = await formApi.createForm(
+    const { $formApi, $messageApi } = useNuxtApp();
+    const { isCompleted, formData } = await $formApi.createForm(
       InvitationFormSchema()
     );
 
@@ -188,10 +188,10 @@ async function CreateInvitation() {
         organizationId: formData.organizationId,
         targetApp: InvitationTargetApp.client,
         expireAt: formData.expireAt,
-        emails: formData.emails,
+        emails: formData?.emails ?? [],
       });
 
-      messageApi.success(
+      $messageApi.success(
         "Invitation successfuly sent! Users will receive an invitation by email."
       );
       return true;
@@ -200,10 +200,10 @@ async function CreateInvitation() {
         organizationId: formData.organizationId,
         targetApp: InvitationTargetApp.client,
         expireAt: formData.expireAt,
-        maxUsage: formData.maxUsage,
+        maxUsage: formData?.maxUsage ?? 1,
       });
       navigator.clipboard.writeText(link);
-      messageApi.success("Invitation link copied to clipboard!");
+      $messageApi.success("Invitation link copied to clipboard!");
       return true;
     }
   } catch (err) {

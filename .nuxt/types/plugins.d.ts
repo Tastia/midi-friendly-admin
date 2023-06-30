@@ -6,10 +6,10 @@ type Decorate<T extends Record<string, any>> = { [K in keyof T as K extends stri
 type InjectionType<A extends Plugin> = A extends Plugin<infer T> ? Decorate<T> : unknown
 
 type NuxtAppInjections = 
-  InjectionType<typeof import("../../node_modules/.pnpm/@pinia+nuxt@0.4.11/node_modules/@pinia/nuxt/dist/runtime/plugin.vue3").default> &
+  InjectionType<typeof import("../../node_modules/.pnpm/@pinia+nuxt@0.4.11_rollup@2.79.1_typescript@5.0.4_vue@3.3.4/node_modules/@pinia/nuxt/dist/runtime/plugin.vue3").default> &
   InjectionType<typeof import("../components.plugin").default> &
-  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.0.0_eslint@8.43.0+sass@1.63.6/node_modules/nuxt/dist/head/runtime/lib/vueuse-head.plugin").default> &
-  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.0.0_eslint@8.43.0+sass@1.63.6/node_modules/nuxt/dist/pages/runtime/router").default> &
+  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.0.0_eslint@8.43.0_rollup@2.79.1_sass@1.63.6_typescript@5.0.4/node_modules/nuxt/dist/head/runtime/lib/vueuse-head.plugin").default> &
+  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.0.0_eslint@8.43.0_rollup@2.79.1_sass@1.63.6_typescript@5.0.4/node_modules/nuxt/dist/pages/runtime/router").default> &
   InjectionType<typeof import("../../src/plugins/google-auth").default> &
   InjectionType<typeof import("../../src/plugins/route-progress").default> &
   InjectionType<typeof import("../../src/plugins/template-filters").default>

@@ -1,12 +1,12 @@
-import { FormSchema } from "@chronicstone/vue-sweetforms";
-import { DataTableSchema } from "@/components/Core/DataTable/types";
-import { CreateOrganizationDto, OrganizationList } from "@/types/organization";
-import { NAlert, NDivider } from "naive-ui";
+import { OrganizationList } from "@/types/organization";
+import { NDivider } from "naive-ui";
+import {
+  buildFormSchema,
+  buildTableSchema,
+} from "@chronicstone/vue-sweettools";
 
-export function OrganizationTableSchema(): DataTableSchema<
-  OrganizationList[number]
-> {
-  return {
+export function OrganizationTableSchema() {
+  return buildTableSchema<OrganizationList[number]>({
     remote: false,
     searchQuery: [
       "name",
@@ -31,18 +31,16 @@ export function OrganizationTableSchema(): DataTableSchema<
         icon: "mdi:plus",
         action: ({ tableApi }) =>
           CreateOrganization().then(
-            (shouldRefresh) => shouldRefresh && tableApi.value.refreshData()
+            (shouldRefresh) => shouldRefresh && tableApi.refreshData()
           ),
       },
     ],
-    rowActions: ({ data }) => [],
-  };
+    rowActions: [],
+  });
 }
 
-export function OrganizationFormSchema(
-  mode: "create" | "update" = "create"
-): FormSchema {
-  return {
+export function OrganizationFormSchema(mode: "create" | "update" = "create") {
+  return buildFormSchema({
     title:
       mode === "create" ? "Create organization" : "Update organization profile",
     gridSize: 8,
@@ -80,51 +78,49 @@ export function OrganizationFormSchema(
           },
           {
             label: "Address - Country",
-            key: "Country",
+            key: "country",
             type: "text",
             required: true,
             size: "8 md:4",
           },
-          {
-            size: 8,
-            key: "divider",
-            type: "info",
-            content: () => (
-              <div>
-                <NDivider />
-                <span class="font-bold text-lg">
-                  Organization administrator
-                </span>
-              </div>
-            ),
-          },
-          {
-            label: "Email address",
-            key: "administratorEmail",
-            type: "text",
-            required: true,
-            description: {
-              title: "About administrator email",
-            },
-          },
         ],
       },
+      {
+        size: 8,
+        key: "divider",
+        type: "info",
+        content: () => (
+          <div>
+            <NDivider />
+            <span class="font-bold text-lg">Organization administrator</span>
+          </div>
+        ),
+      },
+      {
+        label: "Email address",
+        key: "administratorEmail",
+        type: "text",
+        required: true,
+        description: {
+          title: "About administrator email",
+          content:
+            "This email will be used to create an administrator account for this organization.",
+        },
+      },
     ],
-  };
+  });
 }
 
 export async function CreateOrganization() {
   try {
-    const { formApi, messageApi } = useReactifiedApi();
-    const { isCompleted, formData } = await formApi.createForm(
+    const { $formApi, messageApi } = useNuxtApp();
+    const { isCompleted, formData } = await $formApi.createForm(
       OrganizationFormSchema()
     );
 
     if (!isCompleted) return false;
 
-    await OrganizationController.createOrganization(
-      formData as CreateOrganizationDto
-    );
+    await OrganizationController.createOrganization(formData);
 
     messageApi.success("Organization successfuly created!");
     return true;

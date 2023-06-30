@@ -1,4 +1,4 @@
-import { FetchParams } from "@/components/Core/DataTable/types";
+import { FetchParams } from "@chronicstone/vue-sweettools";
 import { LunchGroup } from "@/types/lunchGroups";
 
 export const LunchGroupController = {

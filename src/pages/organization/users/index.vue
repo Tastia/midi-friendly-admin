@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { UserTableSchema } from "~/schemas/user";
+import { DataTable } from "@chronicstone/vue-sweettools";
 
 definePageMeta({
   name: "organization.users",
@@ -11,5 +12,5 @@ const tableSchema = UserTableSchema(userStore.activeOrganizationId as string);
 </script>
 
 <template>
-  <CoreDataTable v-bind="tableSchema">Users</CoreDataTable>
+  <DataTable v-bind="tableSchema">Users</DataTable>
 </template>

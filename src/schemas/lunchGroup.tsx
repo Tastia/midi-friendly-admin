@@ -1,4 +1,4 @@
-import { DataTableSchema } from "@/components/Core/DataTable/types";
+import { buildTableSchema } from "@chronicstone/vue-sweettools";
 import { LunchGroup } from "@/types/lunchGroups";
 import {
   RenderEllipsisText,
@@ -7,13 +7,16 @@ import {
 } from "./utils/renderer";
 import { User } from "../types/user";
 
-export function LunchGroupTableSchema(
-  organizationId?: string
-): DataTableSchema<LunchGroup> {
-  return {
+export function LunchGroupTableSchema(organizationId?: string) {
+  return buildTableSchema<LunchGroup>({
     remote: true,
-    searchQuery: ["label", "owner.firstName", "owner.lastName", "owner.email"],
-    filters: [OrganizationFilter("organization._id")],
+    searchQuery: [
+      "label",
+      "owner.firstName",
+      "owner.lastName",
+      "owner.credentials.email",
+    ],
+    filters: [organizationFilter("organization._id")],
     staticFilters: organizationId
       ? [
           {
@@ -44,5 +47,5 @@ export function LunchGroupTableSchema(
       { label: "Created at", key: "createdAt", render: formatDateTime },
     ],
     datasource: LunchGroupController.getList,
-  };
+  });
 }

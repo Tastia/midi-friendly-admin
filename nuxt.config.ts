@@ -50,6 +50,6 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
       script: [{ src: "https://code.iconify.design/1/1.0.0/iconify.min.js" }],
     },
-    pageTransition: { name: "slide-fade-reverse", mode: "out-in" },
+    pageTransition: { name: "slide-fade", mode: "out-in" },
   },
 });

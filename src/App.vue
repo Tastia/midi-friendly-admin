@@ -6,13 +6,15 @@ import {
   NNotificationProvider,
   NLoadingBarProvider,
 } from "naive-ui";
-import { FormProvider } from "@chronicstone/vue-sweetforms";
-import "@chronicstone/vue-sweetforms/dist/style.css";
+import { FormProvider } from "@chronicstone/vue-sweettools";
+import "@chronicstone/vue-sweettools/dist/style.css";
+import AppProvider from "./AppProvider.vue";
+
 const appStore = useAppStore();
 
 watch(
   () => appStore.isDark,
-  (isDark: boolean) => {
+  (isDark) => {
     if (isDark) document?.querySelector("body")?.classList.add("dark");
     else document?.querySelector("body")?.classList.remove("dark");
   },
@@ -22,29 +24,18 @@ watch(
 
 <template>
   <n-config-provider
+    id="appRoot"
     class="demo"
     :locale="appStore.language"
     :theme="appStore.theme"
     :theme-overrides="appStore.themeOverrides"
   >
-    <form-provider
-      :dark-mode="appStore.isDark"
-      :theme-overrides="appStore.themeOverrides"
-    >
+    <form-provider>
       <n-dialog-provider>
         <n-message-provider>
           <n-notification-provider>
             <n-loading-bar-provider>
-              <n-spin :show="appStore.isLoading">
-                <template v-if="appStore.isLoadingMessage" #description>
-                  <span class="font-black text-primary">
-                    {{ appStore.isLoadingMessage }}
-                  </span>
-                </template>
-                <NuxtLayout>
-                  <NuxtPage />
-                </NuxtLayout>
-              </n-spin>
+              <AppProvider />
             </n-loading-bar-provider>
           </n-notification-provider>
         </n-message-provider>

@@ -32,6 +32,7 @@ export type Restaurant = {
       text?: string;
     }>;
   };
+  disabled: boolean;
   createdAt: string;
   updatedAt: string;
 };

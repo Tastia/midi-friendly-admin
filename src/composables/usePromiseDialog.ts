@@ -1,4 +1,3 @@
-import { useReactifiedApi } from "./useReactifiedApi";
 import { VNodeChild } from "vue";
 
 interface DialogOptions {
@@ -18,8 +17,8 @@ export const useConfirmDialog = ({
   negativeText = "Non",
 }: DialogOptions) =>
   new Promise((resolve, reject) => {
-    const { dialogApi } = useReactifiedApi();
-    dialogApi?.[type]({
+    const { $dialogApi } = useNuxtApp();
+    $dialogApi?.[type]({
       title,
       content,
       positiveText,

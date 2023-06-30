@@ -1,8 +1,7 @@
 import { generateUUID } from "../generator/uuid";
 
-const userStore = useUserStore();
-
 export const MapNavigationItems = (navItems: any[]): any[] => {
+  const userStore = useUserStore();
   return navItems
     .map((item) => {
       const hasAccess = !item?.permissions?.length ? true : true;

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { InvitationTableSchema } from "@/schemas/invitation";
+import { DataTable } from "@chronicstone/vue-sweettools";
 
 definePageMeta({
   name: "organization.invitations",
@@ -11,5 +12,5 @@ const schema = InvitationTableSchema(userStore.activeOrganizationId as string);
 </script>
 
 <template>
-  <CoreDataTable v-bind="schema">Invitations</CoreDataTable>
+  <DataTable v-bind="schema">Invitations</DataTable>
 </template>

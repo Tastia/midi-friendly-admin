@@ -1,6 +1,7 @@
-import { TableFilter } from "~/components/Core/DataTable/types";
+import { TableFilter as TTableFilter } from "~/components/Core/DataTable/types";
+import type { TableFilter } from "@chronicstone/vue-sweettools";
 
-type FilterFactory = (key: string, ...args: any[]) => TableFilter;
+type FilterFactory = (key: string, ...args: any[]) => TTableFilter;
 
 export const TextFilter: FilterFactory = (
   key: string,
@@ -63,15 +64,27 @@ export const OrganizationFilter: FilterFactory = (key: string) => ({
   matchMode: "arrayContains",
 });
 
-export const CredentialProviderFilter: FilterFactory = (key: string) => ({
-  key,
-  label: "Credential Provider",
-  type: "select",
-  options: [
-    { label: "Email", value: "email" },
-    { label: "Google", value: "google" },
-    { label: "Facebook", value: "facebook" },
-    { label: "LinkedIn", value: "linkedin" },
-  ],
-  matchMode: "arrayContains",
-});
+export function credentialProviderFilter(key: string): TableFilter {
+  return {
+    key,
+    label: "Credential Provider",
+    type: "select",
+    options: [
+      { label: "Email", value: "email" },
+      { label: "Google", value: "google" },
+      { label: "Facebook", value: "facebook" },
+      { label: "LinkedIn", value: "linkedin" },
+    ],
+    matchMode: "arrayContains",
+  };
+}
+
+export function organizationFilter(key: string): TableFilter {
+  return {
+    key,
+    label: "Organization",
+    type: "select",
+    options: GetOrganizations,
+    matchMode: "arrayContains",
+  };
+}

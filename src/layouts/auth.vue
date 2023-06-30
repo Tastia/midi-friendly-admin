@@ -33,9 +33,7 @@
 
 <script setup lang="ts">
 import { useThemeVars } from "naive-ui";
-import { useReactifiedApi } from "~/composables/useReactifiedApi";
 
 const appStore = useAppStore();
 const themeVars = useThemeVars();
-useReactifiedApi();
 </script>
